@@ -25,7 +25,7 @@ const initialState: State = {
 function reducer(state: State, action: Action) {
   const { type } = action
 
-  if (type === 'INTERCHANGE_LANGUAGE') {
+  if (type === 'INTERCHANGE_LANGUAGES') {
     return {
       ...state,
       fromLanguage: state.toLanguage,
