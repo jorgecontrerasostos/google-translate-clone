@@ -10,7 +10,7 @@
 import { useReducer } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { type State } from './types'
+import { type Action, type State } from './types'
 
 // 1. Create initial State
 const initialState: State = {
@@ -22,7 +22,7 @@ const initialState: State = {
 }
 
 // 2. Create a reducer
-function reducer(state: State, action) {
+function reducer(state: State, action: Action) {
   const { type } = action
 
   if (type === 'INTERCHANGE_LANGUAGE') {

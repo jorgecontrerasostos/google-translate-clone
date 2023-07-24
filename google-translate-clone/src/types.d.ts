@@ -13,6 +13,6 @@ export type Action =
   // prettier-ignore
   | { type: 'SET_TO_LANGUAGE', payload: string }
   // prettier-ignore
-  | { type: 'SET_FROM_LANGUAGE', payload: string }
+  | { type: 'SET_FROM_TEXT', payload: string }
   // prettier-ignore
   | { type: 'SET_RESULT', payload: string }
