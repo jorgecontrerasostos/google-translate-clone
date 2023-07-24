@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -9,9 +10,10 @@
 import { useReducer } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { type State } from './types'
 
 // 1. Create initial State
-const initialState = {
+const initialState: State = {
   fromLanguage: 'auto',
   toLanguage: 'en',
   fromText: '',
@@ -20,8 +22,8 @@ const initialState = {
 }
 
 // 2. Create a reducer
-function reducer(state, action) {
-  const { type, payload } = action
+function reducer(state: State, action) {
+  const { type } = action
 
   if (type === 'INTERCHANGE_LANGUAGE') {
     return {
@@ -33,20 +35,20 @@ function reducer(state, action) {
   if (type === 'SET_FROM_LANGUAGE') {
     return {
       ...state,
-      fromLanguage: payload,
+      fromLanguage: action.payload,
     }
   }
   if (type === 'SET_TO_LANGUAGE') {
     return {
       ...state,
-      toLanguage: payload,
+      toLanguage: action.payload,
     }
   }
   if (type === 'SET_FROM_TEXT') {
     return {
       ...state,
       loading: true,
-      fromText: payload,
+      fromText: action.payload,
       result: '',
     }
   }
@@ -54,7 +56,7 @@ function reducer(state, action) {
     return {
       ...state,
       loading: false,
-      toText: payload,
+      toText: action.payload,
     }
   }
   return state
@@ -62,10 +64,19 @@ function reducer(state, action) {
 
 function App() {
   // 3. Use reducer Hook
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [{ fromLanguage, toLanguage, fromText, result, loading }, dispatch] =
+    useReducer(reducer, initialState)
+  console.log({ fromLanguage })
+
   return (
     <>
       <h1>Google Translate</h1>
+      <button
+        onClick={() => dispatch({ type: 'SET_FROM_LANGUAGE', payload: 'es' })}
+      >
+        Cambiar a Español
+      </button>
+      {fromLanguage}
     </>
   )
 }
