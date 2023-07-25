@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 
 import { useReducer } from 'react'
-import { type Action, type State } from '../types'
+import { Language, type Action, type State, FromLanguage } from '../types'
 
 // 1. Create initial State
 const initialState: State = {
@@ -16,7 +16,7 @@ const initialState: State = {
   toLanguage: 'en',
   fromText: '',
   result: '',
-  loading: false,
+  loading: false
 }
 
 // 2. Create a reducer
@@ -27,19 +27,19 @@ function reducer(state: State, action: Action) {
     return {
       ...state,
       fromLanguage: state.toLanguage,
-      toLanguage: state.fromLanguage,
+      toLanguage: state.fromLanguage
     }
   }
   if (type === 'SET_FROM_LANGUAGE') {
     return {
       ...state,
-      fromLanguage: action.payload,
+      fromLanguage: action.payload
     }
   }
   if (type === 'SET_TO_LANGUAGE') {
     return {
       ...state,
-      toLanguage: action.payload,
+      toLanguage: action.payload
     }
   }
   if (type === 'SET_FROM_TEXT') {
@@ -47,14 +47,14 @@ function reducer(state: State, action: Action) {
       ...state,
       loading: true,
       fromText: action.payload,
-      result: '',
+      result: ''
     }
   }
   if (type === 'SET_RESULT') {
     return {
       ...state,
       loading: false,
-      toText: action.payload,
+      toText: action.payload
     }
   }
   return state
@@ -67,12 +67,12 @@ export function useStore() {
 
   const interchangeLanguages = () => dispatch({ type: 'INTERCHANGE_LANGUAGES' })
 
-  const setFromLanguage = (payload: string) =>
+  const setFromLanguage = (payload: FromLanguage) =>
     dispatch({ type: 'SET_FROM_LANGUAGE', payload })
 
-  const setToLanguage = (payload: string) => ({
+  const setToLanguage = (payload: Language) => ({
     type: 'SET_TO_LANGUAGE',
-    payload,
+    payload
   })
 
   const setFromText = (payload: string) => ({ type: 'SET_FROM_TEXT', payload })
@@ -89,6 +89,6 @@ export function useStore() {
     setFromLanguage,
     setToLanguage,
     setFromText,
-    setResult,
+    setResult
   }
 }
