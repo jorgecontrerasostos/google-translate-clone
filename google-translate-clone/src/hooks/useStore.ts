@@ -8,7 +8,12 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 
 import { useReducer } from 'react'
-import { Language, type Action, type State, FromLanguage } from '../types'
+import {
+  type Language,
+  type Action,
+  type State,
+  type FromLanguage
+} from '../types'
 
 // 1. Create initial State
 const initialState: State = {
